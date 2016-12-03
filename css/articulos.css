@@ -1,0 +1,13 @@
+.tabla_articulos{
+	width: 100%;
+	border-collapse: separate;
+	border-top: #4ea8f7 5px solid;
+	background: #d7ebfc;
+	color: #131681;
+	
+}
+
+.tabla_articulos tbody tr th{
+	padding: 25px;
+}
+

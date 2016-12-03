@@ -1,0 +1,89 @@
+.tabla_ventasR
+{
+	width: 100%;
+	border-collapse: separate;
+	border-top: #4ea8f7 5px solid;
+	background: #d7ebfc;
+	color: #131681;
+	
+}
+
+.abonos
+{
+	border-top: #4ea8f7 5px solid;
+background: rgba(156, 156, 156, 0.29);
+
+color: #131681;
+text-align: center;
+
+	
+}
+#tabla_ventas
+{
+	width:100%;
+	border-collapse: collapse;
+}
+#head_tabla_ventas
+{
+	background: #9db9d5;
+	
+}
+
+.boton_agregar button
+{
+	background: #4ea8f7;
+	color: white;
+	font-size: 20px;
+	width: 20%;
+	border: 5px solid #4ea8f7;
+	cursor:pointer;
+}
+
+.tabla_ventasR tr th
+{ 
+	padding: 25px;
+}
+
+.abonos tr td
+{ 
+	padding: 25px;
+	text-align: center;
+	width: 20%;
+}
+
+.boton_agregar
+{
+	text-align: right;
+}
+#tabla_nv
+{
+
+	text-align: center;
+	width:100%;
+	border-collapse: collapse;
+}
+
+#tabla_nv tr td
+{
+	text-align: center;
+}
+#tabla_nv tr td input
+{
+	text-align: center;
+}
+.costos
+{
+	text-align: right;
+	margin-right: 10%;
+}
+.costos label
+{
+	background: rgba(156, 156, 156, 0.29);
+	text-decoration: bold;
+	padding: .5%;
+}
+
+.costos span
+{
+	color: blue;
+}
