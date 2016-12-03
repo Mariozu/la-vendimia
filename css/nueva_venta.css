@@ -1,0 +1,65 @@
+.header_nv
+{
+	background: #1f7ed3;
+	border: #1f7ed3 1px solid;
+	color:white;
+}
+.botones_gral
+{
+	background: #36e336;
+	font-size: 20px;
+	text-decoration: bold;
+	color: white;
+	border: 2px solid #36e336;
+	cursor:pointer;
+}
+.cuerpo
+{
+	border: #1f7ed3 2px solid;
+		padding: 1%;
+}
+.container_nv .header_nv header
+{
+	color: white;
+	text-align: left;
+}
+.botones
+{
+	text-align: right;
+}
+
+.hr_blue
+{
+	height: 4px;
+	background: #4996da;
+	border: 2px solid #4996da;
+	width: 90%;
+}
+.hr_gray
+{
+			height: 4px;
+			background: #969393;
+			border: 1px solid #969393;
+			width: 100%;
+}
+.hr_smoke
+{
+	height: 3px;
+	background: #817979;
+	border: 1px solid#817979;
+}
+.tabla_nv tbody tr th
+{
+	padding: 25px;
+}
+.ui-autocomplete-input
+{
+	width: 40%;
+}
+#agregar
+{
+	background: #393232;
+	border: 1px solid #393232;
+	color: white;
+	text-decoration: bold;
+}

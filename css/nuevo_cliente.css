@@ -1,0 +1,21 @@
+.superior_nc{
+	background: #1f24d3;
+	color: white;
+	border: #1f24d3 1px solid;
+}
+.medio_nc{
+	border: #1f24d3 1px solid;
+
+}
+.formulario{
+	text-align: right;
+	margin-right: 60%;
+}
+
+.formulario label{
+	color: green;
+}
+
+.formulario select{
+	width: 40%;
+}
