@@ -1,22 +1,17 @@
-function valida_numeros(e)
+
+function valida_numeros(event)
 {
-	tecla = (document.all) ? e.keyCode : e.which;
-	
-	//Tecla de retroceso para borrar, siempre la permite
-	if (tecla==8 )
-	{
-		return true;
-	}
-	
-	// Patron de entrada, en este caso solo acepta numeros
-	patron =/[.0-9]/;
-	tecla_final = String.fromCharCode(tecla);
-	return patron.test(tecla_final);
+	var keyCode = event.which;
+  if (!(keyCode >= 48 && keyCode <= 57) && keyCode != 8 && keyCode != 190 && keyCode != 9) {
+        event.preventDefault();
+
+        return;
+}
 }
 function valida_clave(e)
 {
 	tecla = (document.all) ? e.keyCode : e.which;
-	if (tecla==8 )
+	if (tecla==8 || tecla==9 )
 	{
 		return true;
 	}
@@ -29,7 +24,7 @@ function valida_clave(e)
 function valida_rfc(e)
 {
 	tecla = (document.all) ? e.keyCode : e.which;
-	if (tecla==8 )
+	if (tecla==8 || tecla==9 )
 	{
 		return true;
 	}
@@ -43,7 +38,7 @@ function valida_rfc(e)
 function valida_calle_numero(e)
 {
 	tecla = (document.all) ? e.keyCode : e.which;
-	if (tecla==8 )
+	if (tecla==8 || tecla==9 )
 	{
 		return true;
 	}
@@ -55,24 +50,19 @@ function valida_calle_numero(e)
 	return patron.test(tecla_final);
 	
 }
-function valida_letras(e)
+function valida_letras(event)
 {
-	tecla = (document.all) ? e.keyCode : e.which;
-	if (tecla==8 )
-	{
-		return true;
-	}
-	patron =/^[\sa-zA-Z ñ\s]$/;
-	//^\*[\*\0-9a-z]\*+$
-	//[\*\0-9\a-z]
-	tecla_final = String.fromCharCode(tecla);
-	return patron.test(tecla_final);
-	
+	var keyCode = event.which;
+	 if (!(keyCode >= 65 && keyCode <= 90) && !(keyCode >= 97 && keyCode <= 122) &&  keyCode != 8 && keyCode != 32 && keyCode != 9) {
+        event.preventDefault();
+
+        return;
+}
 }
 function valida_letras_numeros(e)
 {
 	tecla = (document.all) ? e.keyCode : e.which;
-	if (tecla==8 )
+	if (tecla==8 || tecla==9 )
 	{
 		return true;
 	}
@@ -86,7 +76,7 @@ function valida_letras_numeros(e)
 function valida_poliza(e)
 {
 	tecla = (document.all) ? e.keyCode : e.which;
-	if (tecla==8 )
+	if (tecla==8 || tecla==9 )
 	{
 		return true;
 	}
@@ -96,17 +86,9 @@ function valida_poliza(e)
 	tecla_final = String.fromCharCode(tecla);
 	return patron.test(tecla_final);
 }
-function tabulacion(e) { 
-	
-	
-	var keyCode = e.keyCode || e.which; 
-	if (keyCode == 9) 
-	{
-		console.log(e.preventDefault);
-		e.preventDefault(); 
-		// call custom function here
-	} 
-}
+
+
+
 function convierte(field)
 {
 	field.value = field.value.toUpperCase();
