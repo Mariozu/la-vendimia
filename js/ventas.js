@@ -91,15 +91,15 @@ function CargarTabla()
 
 													enganche=(articulo["enganche"]/100)*parseInt($("#importe-"+articulo["id"]).html());
 													enganche_actual=parseInt($("#enganche_total").html())+enganche;
-													$("#enganche_total").html(enganche_actual);
+													$("#enganche_total").html(parseInt(enganche_actual).toFixed(2));
 
 													BF_enganche=enganche*((articulo["tasa_financiamiento"]*articulo["plazo_maximo"])/100);
 													BF_enganche_actual=parseInt($("#bonificacion_enganche").html())+BF_enganche;
-													$("#bonificacion_enganche").html(BF_enganche_actual);
+													$("#bonificacion_enganche").html(parseInt(BF_enganche_actual).toFixed(2));
 
 													adeudo_total=parseInt($("#precio-"+articulo["id"]).html())-parseInt(enganche)-parseInt(BF_enganche);
 													adeudo_total_actual=parseInt($("#total_cuenta").html())+adeudo_total;
-													$("#total_cuenta").html(adeudo_total_actual);
+													$("#total_cuenta").html(parseInt(adeudo_total_actual).toFixed(2));
 
 													$(".costos").show();
 													math_o[articulo["id"]]=enganche+"//"+BF_enganche+"//"+adeudo_total;
@@ -139,7 +139,7 @@ function EliminarFila(id)
 	quitar=math_o[id].split("//")
 
 	enganche_actual=parseInt($("#enganche_total").html())-parseInt(quitar[0]);
-	$("#enganche_total").html(enganche_actual);
+	$("#enganche_total").html(parseInt(enganche_actual).toFixed(2));
 
 	BF_enganche_actual=parseInt($("#bonificacion_enganche").html())-parseInt(quitar[1]);
 	$("#bonificacion_enganche").html(BF_enganche_actual);
@@ -156,6 +156,32 @@ function EliminarFila(id)
 		$(".costos").hide();
 	}
 }
+
+function calc_enganche(precio_e)
+{
+	console.log("entro a enganche "+precio_e);
+					enganche=(datos[0]["enganche"]/100)*importe;
+					enganche_actual=parseInt($("#enganche_total").html()).toFixed(2)+enganche-parseInt(precio_e);
+					$("#enganche_total").html(parseInt(enganche_actual).toFixed(2));
+				console.log(enganche_actual);  
+}
+function calc_bonificacion(precio_be)
+{
+	
+					BF_enganche=enganche*((datos[0]["tasa_financiamiento"]*datos[0]["plazo_maximo"])/100);
+				console.log(BF_enganche);
+					BF_enganche_actual=parseInt($("#bonificacion_enganche").html()).toFixed(2)+BF_enganche - parseInt(precio_be);
+				console.log(BF_enganche_actual);
+					$("#bonificacion_enganche").html(Math.round(BF_enganche_actual));
+	
+}
+function calc_total(precio)
+{
+	adeudo_total=importe-parseInt(enganche)-parseInt(BF_enganche);
+					adeudo_total_actual=parseInt($("#total_cuenta").html()).toFixed(2)+adeudo_total-parseInt(precio);
+					$("#total_cuenta").html(adeudo_total_actual);
+}
+
 function CalcularImporte(id,existencia)
 {
 	console.log(id);
@@ -172,25 +198,9 @@ function CalcularImporte(id,existencia)
 
 					quitar=math_o[id].split("//")
 
-					enganche=(datos[0]["enganche"]/100)*importe;
-					enganche_actual=parseInt($("#enganche_total").html())+enganche-parseInt(quitar[0]);
-					$("#enganche_total").html(Math.round(enganche_actual));
-				console.log(enganche_actual);
-
-				//console.log($("#bonificacion_enganche").html()+" "+BF_enganche+" "+quitar[1]);
-				console.log(datos[0]["tasa_financiamiento"]);
-					BF_enganche=enganche*((datos[0]["tasa_financiamiento"]*datos[0]["plazo_maximo"])/100);
-				console.log(BF_enganche);
-					BF_enganche_actual=parseInt($("#bonificacion_enganche").html())+BF_enganche - parseInt(quitar[1]);
-				console.log(BF_enganche_actual);
-					$("#bonificacion_enganche").html(Math.round(BF_enganche_actual));
-				
-  						
-				
-					adeudo_total=importe-parseInt(enganche)-parseInt(BF_enganche);
-					adeudo_total_actual=parseInt($("#total_cuenta").html())+adeudo_total-parseInt(quitar[2]);
-					$("#total_cuenta").html(adeudo_total_actual);
-
+					calc_enganche(quitar[0]);
+					calc_bonificacion(quitar[1])
+					calc_total(quitar[2]);
 					math_o[id]=enganche+"//"+BF_enganche+"//"+adeudo_total;
 					//console.log(importe)
 
@@ -209,17 +219,9 @@ function CalcularImporte(id,existencia)
 
 							quitar=math_o[id].split("//")
 
-							enganche=(datos[0]["enganche"]/100)*importe;
-							enganche_actual=parseInt($("#enganche_total").html())+enganche-parseInt(quitar[0]);
-							$("#enganche_total").html(enganche_actual);
-
-							BF_enganche=enganche*((datos[0]["tasa_financiamiento"]*datos[0]["plazo_maximo"])/100);
-							BF_enganche_actual=parseInt($("#bonificacion_enganche").html())+BF_enganche-parseInt(quitar[1]);
-							$("#bonificacion_enganche").html(BF_enganche_actual);
-
-							adeudo_total=importe-parseInt(enganche)-parseInt(BF_enganche);
-							adeudo_total_actual=parseInt($("#total_cuenta").html())+adeudo_total-parseInt(quitar[2]);
-							$("#total_cuenta").html(adeudo_total_actual);
+							calc_enganche(quitar[0]);
+							calc_bonificacion(quitar[1])
+							calc_total(quitar[2]);
 
 							math_o[id]=enganche+"//"+BF_enganche+"//"+adeudo_total;
 
@@ -252,34 +254,34 @@ function VerificarVenta()
 				precio_contado=parseInt($("#total_cuenta").html())/(1+(datos[0]["tasa_financiamiento"]*datos[0]["plazo_maximo"])/100);
 
 				Pago=precio_contado*(1+(datos[0]["tasa_financiamiento"]*3)/100);
-				$("#total_mes_3").html("TOTAL A PAGAR $"+parseInt(Pago));
+				$("#total_mes_3").html("TOTAL A PAGAR $"+parseInt(Pago).toFixed(2));
 				
 		
 				abono_mes=Pago/3;
-				$("#abonos_mes_3").html("$"+parseFloat(abono_mes));
+				$("#abonos_mes_3").html("$"+parseFloat(abono_mes).toFixed(2));
 				ahorro=parseInt($("#total_cuenta").html())-Pago;
-				if (parseInt(ahorro)>=0){$("#ahorro_mes_3").html("SE AHORRA $"+parseInt(ahorro));} else $("#ahorro_mes_3").html("SE AHORRA $0");
+				if (parseInt(ahorro)>=0){$("#ahorro_mes_3").html("SE AHORRA $"+parseInt(ahorro).toFixed(2));} else $("#ahorro_mes_3").html("SE AHORRA $0");
 
 				Pago=precio_contado*(1+(datos[0]["tasa_financiamiento"]*6)/100);
-				$("#total_mes_6").html("TOTAL A PAGAR $"+parseInt(Pago));
+				$("#total_mes_6").html("TOTAL A PAGAR $"+parseInt(Pago).toFixed(2));
 				abono_mes=Pago/6;
-				$("#abonos_mes_6").html("$"+parseInt(abono_mes));
+				$("#abonos_mes_6").html("$"+parseInt(abono_mes).toFixed(2));
 				ahorro=parseInt($("#total_cuenta").html())-Pago;
-				if (parseInt(ahorro)>=0){$("#ahorro_mes_6").html("SE AHORRA $"+parseInt(ahorro));} else $("#ahorro_mes_6").html("SE AHORRA $0");
+				if (parseInt(ahorro)>=0){$("#ahorro_mes_6").html("SE AHORRA $"+parseInt(ahorro).toFixed(2));} else $("#ahorro_mes_6").html("SE AHORRA $0");
 
 				Pago=precio_contado*(1+(datos[0]["tasa_financiamiento"]*9)/100);
-				$("#total_mes_9").html("TOTAL A PAGAR $"+parseInt(Pago));
+				$("#total_mes_9").html("TOTAL A PAGAR $"+parseInt(Pago).toFixed(2));
 				abono_mes=Pago/9;
-				$("#abonos_mes_9").html("$"+parseInt(abono_mes));
+				$("#abonos_mes_9").html("$"+parseInt(abono_mes).toFixed(2));
 				ahorro=parseInt($("#total_cuenta").html())-Pago;
-				if (parseInt(ahorro)>=0){$("#ahorro_mes_9").html("SE AHORRA $"+parseInt(ahorro));} else $("#ahorro_mes_9").html("SE AHORRA $0");
+				if (parseInt(ahorro)>=0){$("#ahorro_mes_9").html("SE AHORRA $"+parseInt(ahorro).toFixed(2));} else $("#ahorro_mes_9").html("SE AHORRA $0");
 
 				Pago=precio_contado*(1+(datos[0]["tasa_financiamiento"]*12)/100);
-				$("#total_mes_12").html("TOTAL A PAGAR $"+parseInt(Pago));
+				$("#total_mes_12").html("TOTAL A PAGAR $"+parseInt(Pago).toFixed(2));
 				abono_mes=Pago/12;
-				$("#abonos_mes_12").html("$"+parseInt(abono_mes));
+				$("#abonos_mes_12").html("$"+parseInt(abono_mes).toFixed(2));
 				ahorro=parseInt($("#total_cuenta").html())-Pago;
-				if (parseInt(ahorro)>=0){$("#ahorro_mes_12").html("SE AHORRA $"+parseInt(ahorro));} else $("#ahorro_mes_12").html("SE AHORRA $0");
+				if (parseInt(ahorro)>=0){$("#ahorro_mes_12").html("SE AHORRA $"+parseInt(ahorro).toFixed(2));} else $("#ahorro_mes_12").html("SE AHORRA $0");
 
 				switch(datos[0]["plazo_maximo"]){
 					case 3:
